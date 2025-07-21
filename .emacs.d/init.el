@@ -12,7 +12,7 @@
 ;;   (package-install 'exec-path-from-shell))
 
 ;; Ensure these packages are installed
-(setq package-selected-packages '(company go-mode lsp-mode markdown-mode bubbleberry-theme treemacs lsp-treemacs))
+(setq package-selected-packages '(company go-mode lsp-mode markdown-mode bubbleberry-theme treemacs lsp-treemacs elcord))
 (dolist (pkg package-selected-packages)
   (unless (package-installed-p pkg)
     (package-install pkg)))
@@ -26,6 +26,8 @@
 (require 'lsp-mode)
 (add-hook 'go-mode-hook #'lsp)
 (add-hook 'c-mode-hook #'lsp)
+(add-hook 'python-mode-hook #'lsp)
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
 ;; Setup theme
 ;; (load-theme 'catppuccin :no-confirm)
@@ -36,6 +38,9 @@
 (global-set-key [f8] 'treemacs)
 (require 'lsp-treemacs)
 (lsp-treemacs-sync-mode 1)
+
+(require 'elcord)
+(elcord-mode)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -52,3 +57,6 @@
 
 (menu-bar-mode -1)
 (tool-bar-mode -1)
+
+(setq-default cursor-type '(bar . 4))
+(setq display-line-numbers-type 'relative)
